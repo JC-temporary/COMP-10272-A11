@@ -1,0 +1,24 @@
+name: Test find lowest number script
+on: [push]
+jobs:
+  different_compare:
+    name: Output compare testing
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+    - name: Test 1 - 10 numbers
+      run: python find_lowest_number.py test_data/test1_input.txt test_data/ci_cd_r1.txt
+    - name: Test 1 - Result
+      run: diff test_data/test1_expected.txt test_data/ci_cd_r1.txt
+    - name: Test 2 - 1 number
+      run: python find_lowest_number.py test_data/test2_input.txt test_data/ci_cd_r2.txt
+    - name: Test 2 - Result
+      run: diff test_data/test2_expected.txt test_data/ci_cd_r2.txt
+    - name: Test 3 - 0 numbers
+      run: python find_lowest_number.py test_data/test3_input.txt test_data/ci_cd_r3.txt
+    - name: Test 3 - Result
+      run: diff test_data/test3_expected.txt test_data/ci_cd_r3.txt
